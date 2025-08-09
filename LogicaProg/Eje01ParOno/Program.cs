@@ -1,37 +1,31 @@
-﻿namespace Eje01ParOno
+﻿using shared;
+using System.Diagnostics;
+
+namespace Eje01ParOno
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            string numeroString = string.Empty;
+            var answer = string.Empty;
+            var options = new List<string> { "s", "n" };
             do
             {
-                Console.Write("Introduce un numero entero  o presione 's' para Salir : ");
-                numeroString = Console.ReadLine()!;
-                if (numeroString!.ToLower() == "s")
+                var numeroEntero = Aga.PidaEntero("Introduce un numero entero : ");
+                if (numeroEntero % 2 == 0)
                 {
-                    continue;
-                }
+                    Console.WriteLine("El numero {0} es Par", numeroEntero);
 
-                int numeroEntero = 0;
-                if (int.TryParse(numeroString, out numeroEntero))
-                {
-                    if (numeroEntero % 2 == 0)
-                    {
-                        Console.WriteLine("El numero {0} es Par", numeroEntero);
-
-                    }
-                    else
-                    {
-                        Console.WriteLine("El numero {0} es impar ", numeroEntero);
-                    }
                 }
                 else
                 {
-                    Console.WriteLine("Lo que ingresaste {0} no es un numero entero ", numeroString);
+                    Console.WriteLine("El numero {0} es impar ", numeroEntero);
                 }
-            } while (numeroString!.ToLower() != "s");
+                do
+                {
+                    answer = Aga.GetValidOptions("Deseas Continuar [s]i  [n]o ? :", options);
+                } while (!options.Any(x => x.Equals(answer, StringComparison.CurrentCultureIgnoreCase)));
+            } while (answer!.Equals("s",StringComparison.CurrentCultureIgnoreCase));
             Console.WriteLine("Game Over");
         }
     }

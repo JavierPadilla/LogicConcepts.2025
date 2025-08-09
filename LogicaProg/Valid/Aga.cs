@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Eje02NumeroMayor
+namespace  shared
+
 {
     public class Aga
     {
