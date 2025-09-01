@@ -31,6 +31,56 @@ namespace shared
             } while (er == true);
             return numeroEntero;
         }
+        public static string PidaString(string mensaje)
+        {
+            
+            Console.Write(mensaje);
+            return Console.ReadLine()!;
+
+
+        }
+        public static float PidaFlotante(string mensaje)
+        {
+            bool er = false;
+            string numeroString;
+            do
+            {
+                Console.Write(mensaje);
+                numeroString = Console.ReadLine()!;
+
+                if (float.TryParse(numeroString, out float numeroFloat) == true)
+                {
+                    return numeroFloat;
+                }
+                else
+                {
+                    Console.WriteLine($"Numero  Flotante : {numeroString} no valido\n ");
+                    er = true;
+                }
+            } while (er == true);
+            return 0;
+        }
+        public static decimal PidaDecimal(string mensaje)
+        {
+            bool er = false;
+            string numeroString;
+            do
+            {
+                Console.Write(mensaje);
+                numeroString = Console.ReadLine()!;
+
+                if (decimal.TryParse(numeroString, out decimal numeroFloat) == true)
+                {
+                    return numeroFloat;
+                }
+                else
+                {
+                    Console.WriteLine($"Numero  Flotante : {numeroString} no valido\n ");
+                    er = true;
+                }
+            } while (er == true);
+            return 0;
+        }
         public static string? GetValidOptions(string menssage, List<string> options)
         {
             Console.Write(menssage);
