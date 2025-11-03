@@ -13,7 +13,7 @@ namespace Eje06NominaSencilla
             {
                 var name = Aga.PidaString(
                     "Nombre del empleado...........:");
-                var nHoras = Aga.PidaEntero(
+                var nHoras = Aga.PidaDecimal(
                     "Numero de horas trabajadas....:");
                 var valorHora = Aga.PidaDecimal(
                     "Cual es el valor de la hora?  $");
@@ -22,10 +22,10 @@ namespace Eje06NominaSencilla
 
                 var salario = nHoras * valorHora;
 
-                Console.WriteLine(name);
+                Console.WriteLine($"Nombre del empleado:   {name}");
                 if (salario > salarioMinimo)
                 {
-                    Console.WriteLine($"Salario es de : $ {salario:C2}"  );
+                    Console.WriteLine($"El Salario es de : $ {salario:C2}"  );
                 }
                 else
                 {

@@ -69,9 +69,9 @@ namespace shared
                 Console.Write(mensaje);
                 numeroString = Console.ReadLine()!;
 
-                if (decimal.TryParse(numeroString, out decimal numeroFloat) == true)
+                if (decimal.TryParse(numeroString, out decimal numeroDecimal) == true)
                 {
-                    return numeroFloat;
+                    return numeroDecimal;
                 }
                 else
                 {
