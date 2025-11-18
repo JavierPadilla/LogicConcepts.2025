@@ -48,7 +48,7 @@ namespace Eje09_EnvioMercancia
                  } while (!Fpago.Any(x =>x.Equals(pago,StringComparison.CurrentCultureIgnoreCase)));
 
                 decimal Tarifa = CalcularTarifa(Peso, Value, ismondey, pago);
-                Console.WriteLine($"La tarifa a pagar es de : $ {Tarifa:N2}");
+                Console.WriteLine($"\nLa tarifa a pagar es de : $ {Tarifa:N2}");
 
                 do
                 {
@@ -58,6 +58,27 @@ namespace Eje09_EnvioMercancia
             } while (answer!.Equals("s", StringComparison.CurrentCultureIgnoreCase));
 
            
+        }
+
+        private static decimal CalcularTarifa(float peso, decimal value, string ismondey, string pago)
+        {
+            decimal x = 0.0M;
+            peso = (int)peso;
+            if (peso < 100) x = 20000M;
+            if (peso >= 100 && peso <= 150) x = 25000M;
+            if (peso > 150 && peso <= 200) x = 30000M;
+            int y = (int)peso - 200;
+            x = 35000M+ (int)(y/10)*2000M;
+            //Promociones
+            if (ismondey.ToLower() == "s" && pago.ToLower()=="t") return x * 0.5M;
+            if (pago.ToLower() == "e" && value > 1000000M) return x * 0.6M;
+            // Descuentos
+            if (value >= 300000M && value <= 600000M) return x * 0.9M;
+            if (value > 600000M && value <= 1000000M) return x * 0.8M;
+            if (value > 1000000M) return x * 0.7M;
+
+            return x;
+
         }
     }
 }
