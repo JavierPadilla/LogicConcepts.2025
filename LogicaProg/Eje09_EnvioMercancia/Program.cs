@@ -47,6 +47,8 @@ namespace Eje09_EnvioMercancia
                    pago=Aga.GetValidOptions("Tipo de pago [E]fectivo  [T]arjeta : ",Fpago)!;
                  } while (!Fpago.Any(x =>x.Equals(pago,StringComparison.CurrentCultureIgnoreCase)));
 
+                decimal Tarifa = CalcularTarifa(Peso, Value, ismondey, pago);
+                Console.WriteLine($"La tarifa a pagar es de : $ {Tarifa:N2}");
 
                 do
                 {
