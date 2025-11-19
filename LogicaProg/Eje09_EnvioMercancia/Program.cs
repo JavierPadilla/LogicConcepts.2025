@@ -27,10 +27,10 @@ namespace Eje09_EnvioMercancia
                 "Si el cliente aplica a una promoción, no puede aplicar a un descuento. Se debe obtener el valor total del envío.\n");
             #endregion
 
-            
+
             var answer = string.Empty;
             var options = new List<string> { "s", "n" };
-            var Fpago=new List<string> {"e","t" };
+            var Fpago = new List<string> { "e", "t" };
             do
             {
                 var Peso = Aga.PidaFlotante("Peso de la mercancía  : ");
@@ -40,12 +40,15 @@ namespace Eje09_EnvioMercancia
                 do
                 {
                     ismondey = Aga.GetValidOptions("Es lunes [S]í [N]o :", options)!;
-             
+
                 } while (!options.Any(x => x.Equals(ismondey, StringComparison.CurrentCultureIgnoreCase)));
                 do
                 {
-                   pago=Aga.GetValidOptions("Tipo de pago [E]fectivo  [T]arjeta : ",Fpago)!;
-                 } while (!Fpago.Any(x =>x.Equals(pago,StringComparison.CurrentCultureIgnoreCase)));
+                    pago = Aga.GetValidOptions("Tipo de pago [E]fectivo  [T]arjeta : ", Fpago)!;
+                } while (!Fpago.Any(x => x.Equals(pago, StringComparison.CurrentCultureIgnoreCase)));
+
+                decimal value_tarifa = CalcularTarifa(Peso,ismondey,pago,Value);
+                Console.WriteLine($"La tarifa a Pagar es de ${value_tarifa:N2}");
 
 
                 do
@@ -55,7 +58,32 @@ namespace Eje09_EnvioMercancia
 
             } while (answer!.Equals("s", StringComparison.CurrentCultureIgnoreCase));
 
-           
+
+        }
+
+        private static decimal CalcularTarifa(float peso,string dia,string tpago,decimal Value)
+        {
+            decimal tarifa = 0;
+            peso=(int) peso;
+            if (peso < 100) tarifa =20000.0M;
+            if (peso >100 && peso <= 150) tarifa =25000.0M;
+            if (peso >150 && peso <= 200) tarifa =30000.0M;
+            int npeso = (int)peso - 200;
+            if ( peso>200) tarifa =35000M + (npeso / 10) * (2000);
+            
+            if (dia.ToLower() == "s" && tpago.ToLower() == "t")
+            {
+                return tarifa * 0.5M;
+
+            }
+            if (tpago.ToLower()=="e" && Value > 1000000)
+            {
+                return tarifa * 0.6M;
+            }
+            if (Value >= 300000M && Value <= 600000M) return tarifa * 0.9M;
+            if (Value > 600000M & Value <= 1000000) return tarifa * 0.8M;
+            if (Value > 1000000M) return tarifa * 0.7M;
+            return tarifa;
         }
     }
 }
